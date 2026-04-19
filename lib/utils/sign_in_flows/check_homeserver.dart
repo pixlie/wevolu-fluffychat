@@ -58,7 +58,11 @@ Future<void> connectToHomeserverFlow(
       final pathSegments = List.of(
         GoRouter.of(context).routeInformationProvider.value.uri.pathSegments,
       );
-      pathSegments.removeLast();
+      // VolunteerHub patch: fix GoRouter routing bug when called from /home with
+      // presetHomeserver set. removeLast() on ['home'] yields [], then joining
+      // produces '/login' (unknown route) instead of '/home/login'.
+      if (pathSegments.isNotEmpty) pathSegments.removeLast();
+      if (pathSegments.isEmpty) pathSegments.add('home');
       pathSegments.add('login');
       context.go('/${pathSegments.join('/')}', extra: client);
       setState(AsyncSnapshot.withData(ConnectionState.done, true));

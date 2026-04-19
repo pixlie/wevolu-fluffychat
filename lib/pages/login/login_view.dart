@@ -50,13 +50,13 @@ class LoginView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     autofillHints: controller.loading
                         ? null
-                        : [AutofillHints.username],
+                        : [AutofillHints.email],
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.account_box_outlined),
                       errorText: controller.usernameError,
                       errorStyle: const TextStyle(color: Colors.orange),
-                      hintText: '@username:domain',
-                      labelText: L10n.of(context).matrixId,
+                      hintText: 'your@email.com',
+                      labelText: 'Email',
                     ),
                   ),
                 ),

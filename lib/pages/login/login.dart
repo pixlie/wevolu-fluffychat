@@ -54,14 +54,18 @@ class LoginController extends State<Login> {
     _coolDown?.cancel();
 
     try {
-      final username = usernameController.text;
-      AuthenticationIdentifier identifier;
+      // VolunteerHub patch: users log in with their VolunteerHub email.
+      // Encode full email as Matrix localpart using =40 for '@'
+      // (john@acme.com → @john=40acme.com:host) — avoids conflicts between users
+      // who share a localpart across different email domains (john@acme vs john@gmail).
+      String username = usernameController.text.trim();
       if (username.isEmail) {
-        identifier = AuthenticationThirdPartyIdentifier(
-          medium: 'email',
-          address: username,
-        );
-      } else if (username.isPhoneNumber) {
+        final localpart = username.toLowerCase().replaceAll('@', '=40');
+        final host = widget.client.homeserver?.host ?? '';
+        username = '@$localpart:$host';
+      }
+      AuthenticationIdentifier identifier;
+      if (username.isPhoneNumber) {
         identifier = AuthenticationThirdPartyIdentifier(
           medium: 'msisdn',
           address: username,

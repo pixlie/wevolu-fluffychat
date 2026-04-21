@@ -104,11 +104,12 @@ class SpacesNavigationRail extends StatelessWidget {
                       },
                     ),
                   ),
-                  if (FluffyThemes.isColumnMode(context))
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: StartChatFab(),
-                    ),
+                  // wevolu: "New chat" FAB hidden in desktop nav rail — direct room creation not supported
+                  // if (FluffyThemes.isColumnMode(context))
+                  //   Padding(
+                  //     padding: const EdgeInsets.all(12.0),
+                  //     child: StartChatFab(),
+                  //   ),
                 ],
               ),
             );

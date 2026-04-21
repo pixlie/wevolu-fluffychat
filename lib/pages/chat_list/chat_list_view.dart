@@ -45,12 +45,8 @@ class ChatListView extends StatelessWidget {
               behavior: HitTestBehavior.translucent,
               child: Scaffold(
                 body: ChatListViewBody(controller),
-                floatingActionButton:
-                    !controller.isSearchMode &&
-                        controller.activeSpaceId == null &&
-                        !FluffyThemes.isColumnMode(context)
-                    ? StartChatFab()
-                    : const SizedBox.shrink(),
+                // wevolu: "New chat" FAB hidden — direct room creation not supported
+                floatingActionButton: const SizedBox.shrink(),
               ),
             ),
           ),

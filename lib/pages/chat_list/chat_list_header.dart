@@ -116,7 +116,8 @@ class ChatListHeader extends StatelessWidget implements PreferredSizeWidget {
                               maxLines: 2,
                             ),
                           )
-                  : SizedBox(width: 0, child: ClientChooserButton(controller)),
+                  // wevolu: "Account and settings" icon hidden — account switching not supported
+                  : const SizedBox.shrink(),
             ),
           );
         },

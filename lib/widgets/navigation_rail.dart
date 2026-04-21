@@ -66,16 +66,9 @@ class SpacesNavigationRail extends StatelessWidget {
                           );
                         }
                         i--;
+                        // wevolu: "New space" button hidden — space creation not supported
                         if (i == allSpaces.length) {
-                          return NaviRailItem(
-                            isSelected: false,
-                            onTap: () => context.go('/rooms/newspace'),
-                            icon: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(Icons.add),
-                            ),
-                            toolTip: L10n.of(context).createNewSpace,
-                          );
+                          return const SizedBox.shrink();
                         }
                         final space = allSpaces[i];
                         final displayname = allSpaces[i]

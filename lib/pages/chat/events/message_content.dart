@@ -9,9 +9,7 @@ import 'package:fluffychat/utils/adaptive_bottom_sheet.dart';
 import 'package:fluffychat/utils/date_time_extension.dart';
 import 'package:fluffychat/utils/matrix_sdk_extensions/matrix_locals.dart';
 import 'package:fluffychat/widgets/avatar.dart';
-import 'package:fluffychat/widgets/matrix.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:matrix/encryption.dart';
 import 'package:matrix/matrix.dart';
 
@@ -58,12 +56,7 @@ class MessageContent extends StatelessWidget {
       );
       return;
     }
-    final client = Matrix.of(context).client;
-    final state = await client.getCryptoIdentityState();
-    if (!state.connected) {
-      final success = await context.push('/backup');
-      if (success != true) return;
-    }
+    // wevolu: skip backup bootstrap redirect — key backup not supported
     event.requestKey();
     final sender = event.senderFromMemoryOrFallback;
     await showAdaptiveBottomSheet(

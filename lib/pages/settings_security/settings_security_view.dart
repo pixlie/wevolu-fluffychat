@@ -153,15 +153,7 @@ class SettingsSecurityView extends StatelessWidget {
                       onTap: () =>
                           context.go('/rooms/settings/security/password'),
                     ),
-                  ListTile(
-                    iconColor: Colors.orange,
-                    leading: const Icon(Icons.delete_sweep_outlined),
-                    title: Text(
-                      L10n.of(context).dehydrate,
-                      style: const TextStyle(color: Colors.orange),
-                    ),
-                    onTap: controller.dehydrateAction,
-                  ),
+                  // wevolu: "Dehydrate" (export session backup) hidden — key backup not supported
                   Divider(color: theme.dividerColor),
                   ListTile(
                     iconColor: Colors.red,

@@ -1,6 +1,5 @@
 import 'package:fluffychat/config/setting_keys.dart';
 import 'package:fluffychat/l10n/l10n.dart';
-import 'package:fluffychat/pages/intro/flows/restore_backup_flow.dart';
 import 'package:fluffychat/utils/platform_infos.dart';
 import 'package:fluffychat/widgets/layouts/login_scaffold.dart';
 import 'package:fluffychat/widgets/matrix.dart';
@@ -43,17 +42,7 @@ class IntroPage extends StatelessWidget {
           PopupMenuButton(
             useRootNavigator: true,
             itemBuilder: (_) => [
-              PopupMenuItem(
-                onTap: isLoading ? null : () => restoreBackupFlow(context),
-                child: Row(
-                  mainAxisSize: .min,
-                  children: [
-                    const Icon(Icons.import_export_outlined),
-                    const SizedBox(width: 12),
-                    Text(L10n.of(context).hydrate),
-                  ],
-                ),
-              ),
+              // wevolu: "Restore backup" (hydrate) hidden — key backup not supported
               PopupMenuItem(
                 onTap: () => launchUrlString(AppSettings.privacyPolicy.value),
                 child: Row(

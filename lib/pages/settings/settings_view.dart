@@ -136,13 +136,7 @@ class SettingsView extends StatelessWidget {
               },
             ),
             Divider(color: theme.dividerColor),
-            SwitchListTile.adaptive(
-              controlAffinity: ListTileControlAffinity.trailing,
-              value: controller.cryptoIdentityConnected == true,
-              secondary: const Icon(Icons.backup_outlined),
-              title: Text(L10n.of(context).chatBackup),
-              onChanged: controller.firstRunBootstrapAction,
-            ),
+            // wevolu: "Chat Backup" toggle hidden — key backup not supported
             Divider(color: theme.dividerColor),
             ListTile(
               leading: const Icon(Icons.format_paint_outlined),

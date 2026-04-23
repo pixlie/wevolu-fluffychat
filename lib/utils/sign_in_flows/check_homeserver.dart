@@ -73,7 +73,8 @@ Future<void> connectToHomeserverFlow(
 
     if (context.mounted) {
       setState(AsyncSnapshot.withData(ConnectionState.done, true));
-      context.go('/backup');
+      // wevolu: skip backup bootstrap — key backup not supported
+      context.go('/rooms');
     }
   } catch (e, s) {
     Logs().w('Unable to login', e, s);

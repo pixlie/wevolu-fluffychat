@@ -86,7 +86,8 @@ class LoginController extends State<Login> {
         initialDeviceDisplayName: PlatformInfos.clientName,
       );
       if (mounted) {
-        context.go('/backup');
+        // wevolu: skip backup bootstrap — key backup not supported
+        context.go('/rooms');
       }
     } on MatrixException catch (exception) {
       setState(() => passwordError = exception.errorMessage);

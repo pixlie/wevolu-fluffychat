@@ -5,7 +5,9 @@ import 'package:fluffychat/pages/chat_list/navi_rail_item.dart';
 import 'package:fluffychat/pages/chat_list/start_chat_fab.dart';
 import 'package:fluffychat/utils/matrix_sdk_extensions/matrix_locals.dart';
 import 'package:fluffychat/utils/stream_extension.dart';
+import 'package:fluffychat/widgets/adaptive_dialogs/show_ok_cancel_alert_dialog.dart';
 import 'package:fluffychat/widgets/avatar.dart';
+import 'package:fluffychat/widgets/future_loading_dialog.dart';
 import 'package:fluffychat/widgets/matrix.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -110,6 +112,40 @@ class SpacesNavigationRail extends StatelessWidget {
                   //     padding: const EdgeInsets.all(12.0),
                   //     child: StartChatFab(),
                   //   ),
+                  NaviRailItem(
+                    isSelected: false,
+                    onTap: () async {
+                      final matrix = Matrix.of(context);
+                      final cryptoConnected = matrix
+                              .client.encryption?.crossSigning.enabled ==
+                          true;
+                      if (await showOkCancelAlertDialog(
+                            useRootNavigator: false,
+                            context: context,
+                            title: L10n.of(context).areYouSureYouWantToLogout,
+                            message: L10n.of(context).noBackupWarning,
+                            isDestructive: !cryptoConnected,
+                            okLabel: L10n.of(context).logout,
+                            cancelLabel: L10n.of(context).cancel,
+                          ) ==
+                          OkCancelResult.cancel) {
+                        return;
+                      }
+                      await showFutureLoadingDialog(
+                        context: context,
+                        future: () => matrix.client.logout(),
+                      );
+                    },
+                    icon: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Icon(Icons.logout_outlined),
+                    ),
+                    selectedIcon: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Icon(Icons.logout),
+                    ),
+                    toolTip: L10n.of(context).logout,
+                  ),
                 ],
               ),
             );

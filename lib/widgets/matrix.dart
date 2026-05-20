@@ -164,7 +164,8 @@ class MatrixState extends State<Matrix> with WidgetsBindingObserver {
                 );
                 _registerSubs(_loginClientCandidate!.clientName);
                 _loginClientCandidate = null;
-                FluffyChatApp.router.go('/backup');
+                // wevolu: skip backup setup — E2EE not used, all messages stored plaintext on server
+                FluffyChatApp.router.go('/home');
               });
     if (widget.clients.isEmpty) widget.clients.add(candidate);
     return candidate;
